@@ -13,9 +13,7 @@ export default function MainPage() {
 
   return (
     <div className="homepage-container">
-      <div className="temple-logo-container">
-        <img src="/Temple-logo.png" alt={t('title')} className="temple-logo" />
-      </div>
+      <div className="temple-title">{t('title')}</div>
       
       <div className="top-nav">
         <div className="history-icon" onClick={() => navigateTo('/lishijilu')}>
@@ -56,14 +54,6 @@ export default function MainPage() {
           <div className="feature-description">{t('marketplace_description')}</div>
         </div>
         <div className="green-token"></div>
-      </div>
-      
-      {/* 底部品牌标识区域 */}
-      <div className="bottom-brand-section">
-        <div className="brand-showcase">
-          <img src="/logo2.png" alt="Brand Logo" className="bottom-brand-logo" />
-          <div className="brand-accent-line"></div>
-        </div>
       </div>
     </div>
   )

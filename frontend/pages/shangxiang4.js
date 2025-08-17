@@ -105,11 +105,6 @@ export default function ShangXiang4() {
               <div className="blessing-content">
                 {getBlessingText()}
               </div>
-              
-              {/* 纸张内认证水印 */}
-              <div className="paper-watermark">
-                <img src="/logo1.jpg" alt="Certification" className="paper-cert-logo" />
-              </div>
             </div>
           </div>
         </div>

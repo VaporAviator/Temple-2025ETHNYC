@@ -23,103 +23,22 @@ html, body {
   overflow: hidden;
 }
 
-/* Temple Logo Container */
-.temple-logo-container {
+.temple-title {
   position: absolute;
-  top: 15px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
-}
-
-.temple-logo {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* Bottom Brand Section */
-.bottom-brand-section {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.brand-showcase {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.bottom-brand-logo {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-}
-
-.bottom-brand-logo:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.brand-accent-line {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #3F4442 20%, #3F4442 80%, transparent 100%);
-  opacity: 0.6;
-}
-
-/* Paper Watermark - 纸张内水印 */
-.paper-watermark {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 15;
-}
-
-.paper-cert-logo {
-  width: 35px;
-  height: 35px;
-  object-fit: contain;
-  opacity: 0.4;
-  border-radius: 4px;
-  transition: opacity 0.3s ease;
-}
-
-.paper-cert-logo:hover {
-  opacity: 0.6;
-}
-
-/* Certification Watermark - 保留给其他页面使用 */
-.certification-watermark {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
-}
-
-.cert-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  opacity: 0.6;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease;
-}
-
-.cert-logo:hover {
-  opacity: 0.8;
+  max-width: 70%;
+  font-family: 'Source Han Serif CN';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: #3F4442;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Language Switcher */
@@ -3117,39 +3036,13 @@ html[lang="zh"] .detailed-analysis-content {
 /* 香炉动画容器 */
 .incense-animation-container {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  left: calc(50% - 150px);
-  top: 200px;
+  width: 200px;
+  height: 250px;
+  left: calc(50% - 100px);
+  top: 250px;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-/* 上香动画视频 */
-.incense-animation-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-/* 视频回退内容 */
-.video-fallback {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(245, 249, 250, 0.8);
-  border-radius: 10px;
-}
-
-.fallback-text {
-  font-family: 'Source Han Serif CN';
-  font-size: 18px;
-  color: #3F4442;
-  text-align: center;
+  align-items: flex-end;
 }
 
 /* 香炉主体 */

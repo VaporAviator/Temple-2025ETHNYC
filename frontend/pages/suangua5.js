@@ -2,52 +2,47 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import PaymentOptionsWidget from '../components/PaymentOptionsWidget'
-import WalletButton from '../components/WalletButton'
-import DebugWallet from '../components/DebugWallet'
 
 export default function SuanGua5() {
   const { t } = useTranslation('common')
   const router = useRouter()
   const { question, numbers, divinationData } = router.query
   const [customAmount, setCustomAmount] = useState('')
-  const [selectedCurrency, setSelectedCurrency] = useState('ETH')
+  const [selectedCurrency, setSelectedCurrency] = useState('USDC')
   const [selectedAmount, setSelectedAmount] = useState(null)
-  const [paymentError, setPaymentError] = useState('')
-  const [paymentSuccess, setPaymentSuccess] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
 
-  const handlePaymentSuccess = (paymentData) => {
-    setPaymentSuccess(true)
-    setPaymentError('')
-    
-    console.log('Payment successful:', paymentData)
-    
-    // Navigate to next page with payment confirmation
-    router.push({
-      pathname: '/suangua6',
-      query: {
-        question: question,
-        numbers: numbers,
-        paid: 'true',
-        amount: paymentData.amount,
-        currency: paymentData.currency,
-        method: paymentData.method,
-        txHash: paymentData.txHash || paymentData.sessionId,
-        divinationData: divinationData
-      }
-    })
-  }
+  const handlePay = async () => {
+    const amount = selectedAmount || parseFloat(customAmount)
+    if (!amount || amount <= 0) {
+      alert(t('invalidAmount'))
+      return
+    }
 
-  const handlePaymentError = (error) => {
-    setPaymentError(error)
-    setPaymentSuccess(false)
+    setIsProcessing(true)
+    
+    // 模拟支付处理
+    setTimeout(() => {
+      setIsProcessing(false)
+      router.push({
+        pathname: '/suangua6',
+        query: {
+          question: question,
+          numbers: numbers,
+          paid: 'true',
+          amount: amount,
+          currency: selectedCurrency,
+          divinationData: divinationData // 传递占卜数据到下一页
+        }
+      })
+    }, 2000)
   }
 
   const handleBack = () => {
     router.back()
   }
 
-  const presetAmounts = [0.001, 0.005, 0.01] // More realistic amounts for ETH
+  const presetAmounts = [1, 5, 10]
 
   const handlePresetSelect = (amount) => {
     setSelectedAmount(amount)
@@ -61,7 +56,6 @@ export default function SuanGua5() {
 
   return (
     <div className="suangua5-container">
-      <DebugWallet />
       {/* 顶部导航 */}
       <div className="top-header">
         <div className="back-arrow" onClick={handleBack}>←</div>
@@ -99,9 +93,7 @@ export default function SuanGua5() {
               onChange={(e) => setSelectedCurrency(e.target.value)}
               className="currency-dropdown"
             >
-              <option value="ETH">ETH</option>
-              <option value="SOL">SOL (Coming Soon)</option>
-              <option value="APT">APT (Coming Soon)</option>
+              <option value="USDC">USDC</option>
             </select>
             <div className="dropdown-arrow">▼</div>
           </div>
@@ -120,25 +112,14 @@ export default function SuanGua5() {
           ))}
         </div>
         
-        {/* Wallet Connection */}
-        <div className="wallet-connection">
-          <WalletButton />
-        </div>
-
-        {/* Payment Error */}
-        {paymentError && (
-          <div className="payment-error">
-            {paymentError}
-          </div>
-        )}
-
-        {/* Payment Options */}
-        <PaymentOptionsWidget
-          amount={selectedAmount || parseFloat(customAmount)}
-          currency={selectedCurrency}
-          onSuccess={handlePaymentSuccess}
-          onError={handlePaymentError}
-        />
+        {/* 继续解锁按钮 */}
+        <button 
+          onClick={handlePay}
+          disabled={isProcessing}
+          className="continue-button"
+        >
+          <span>{isProcessing ? t('processing') : t('continueToUnlock')}</span>
+        </button>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import PrivyPaymentHandler from './PrivyPaymentHandler'
+import OnrampWidget from './OnrampWidget'
 
 export default function PaymentOptionsWidget({ 
   amount, 
@@ -17,6 +18,15 @@ export default function PaymentOptionsWidget({
     onSuccess({
       ...paymentData,
       method: 'crypto'
+    })
+  }
+
+  const handleOnrampSuccess = (rampData) => {
+    setIsProcessing(false)
+    onSuccess({
+      ...rampData,
+      method: 'fiat',
+      message: 'Crypto purchased successfully! Please wait for confirmation.'
     })
   }
 
@@ -42,12 +52,23 @@ export default function PaymentOptionsWidget({
               <div className="method-desc">Use existing ETH balance</div>
             </div>
           </button>
+
+          <button
+            className={`method-button ${paymentMethod === 'fiat' ? 'active' : ''}`}
+            onClick={() => setPaymentMethod('fiat')}
+          >
+            <div className="method-icon">💳</div>
+            <div className="method-info">
+              <div className="method-name">Buy with Fiat</div>
+              <div className="method-desc">Credit card, bank transfer</div>
+            </div>
+          </button>
         </div>
       </div>
 
       {/* Payment Interface */}
       <div className="payment-interface">
-        {paymentMethod === 'crypto' && (
+        {paymentMethod === 'crypto' ? (
           <PrivyPaymentHandler
             amount={amount}
             currency={currency}
@@ -74,8 +95,34 @@ export default function PaymentOptionsWidget({
               </div>
             )}
           </PrivyPaymentHandler>
+        ) : (
+          <OnrampWidget
+            onSuccess={handleOnrampSuccess}
+            onError={handleError}
+          >
+            {({ startOnramp, isLoading: onrampLoading, isConnected }) => (
+              <div className="fiat-payment">
+                <div className="payment-info">
+                  <p>Buy {amount} {currency} with fiat currency</p>
+                  <p className="fiat-note">Funds will be added to your wallet</p>
+                </div>
+                <button 
+                  onClick={() => startOnramp(amount, currency)}
+                  disabled={onrampLoading || !isConnected || !amount}
+                  className="payment-button fiat-button"
+                >
+                  {!isConnected 
+                    ? 'Connect Wallet First'
+                    : onrampLoading 
+                      ? 'Opening Coinbase...' 
+                      : `Buy ${amount} ${currency}`
+                  }
+                </button>
+              </div>
+            )}
+          </OnrampWidget>
         )}
       </div>
     </div>
   )
-} 
+}

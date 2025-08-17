@@ -55,23 +55,28 @@ export default function ShangXiang3() {
         <div className="shangxiang3-page-title">{t('blessing')}</div>
       </div>
       
-      {/* 上香动画视频容器 */}
+      {/* 香炉和烟雾动画容器 */}
       <div className="incense-animation-container">
-        {animationStarted && (
-          <video 
-            className="incense-animation-video"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-          >
-            <source src="/上香动画.mp4" type="video/mp4" />
-            {/* 回退内容 */}
-            <div className="video-fallback">
-              <div className="fallback-text">{t('offeringInProgress')}</div>
+        {/* 香炉 */}
+        <div className="incense-burner">
+          <div className="burner-base"></div>
+          <div className="burner-body"></div>
+          <div className="burner-rim"></div>
+          
+          {/* 香炷 */}
+          <div className="incense-stick"></div>
+          
+          {/* 烟雾效果 */}
+          {animationStarted && (
+            <div className="smoke-container">
+              <div className="smoke smoke-1"></div>
+              <div className="smoke smoke-2"></div>
+              <div className="smoke smoke-3"></div>
+              <div className="smoke smoke-4"></div>
+              <div className="smoke smoke-5"></div>
             </div>
-          </video>
-        )}
+          )}
+        </div>
       </div>
       
       {/* 动画文字 */}

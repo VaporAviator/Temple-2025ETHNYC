@@ -9,9 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/coinbase-sdk": "^0.25.0",
     "@farcaster/miniapp-wagmi-connector": "^1.0.0",
-    "@privy-io/react-auth": "^2.21.3",
     "@tanstack/react-query": "^5.0.0",
     "next": "14.0.0",
     "next-i18next": "^15.4.2",
@@ -19,7 +17,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^15.6.1",
-    "viem": "^2.33.3"
+    "viem": "^2.0.0",
+    "wagmi": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^8.42.0",

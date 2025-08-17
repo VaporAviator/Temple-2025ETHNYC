@@ -126,4 +126,4 @@ export default function PrivyPaymentHandler({ amount, currency, onSuccess, onErr
       })}
     </div>
   )
-} 
+}

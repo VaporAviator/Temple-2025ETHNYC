@@ -233,11 +233,6 @@ export default function SuanGua6() {
           </div>
         </div>
         
-        {/* 认证水印 */}
-        <div className="certification-watermark">
-          <img src="/logo1.jpg" alt="Certification" className="cert-logo" />
-        </div>
-        
         {/* Frame 2085662470 - 按钮区域 */}
         <div className="frame-2085662470">
           <button onClick={handleShareToX} className="share-button-1">

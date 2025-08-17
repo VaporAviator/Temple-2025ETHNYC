@@ -17,4 +17,4 @@ export const privyConfig = {
       createOnLogin: 'users-without-wallets',
     },
   }
-} 
+}
