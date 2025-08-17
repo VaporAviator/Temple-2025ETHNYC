@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: temple-frontend
+    env: node
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    plan: free
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false  # 需要在 Render 控制台手动设置后端 URL
+      - key: NODE_ENV
+        value: "production"
